@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "90dba742-4455-48e9-b96c-b924bdea969c",
+		"name": "测试项目",
+		"description": "测试描述",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "folder1",
+			"item": [
+				{
+					"name": "request1 Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "totototototken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "openid",
+									"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/info/get?token=123123",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"info",
+								"get"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "123123"
+								}
+							]
+						},
+						"description": "request1描述"
+					},
+					"response": [
+						{
+							"name": "request1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=utf-8",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "openid",
+											"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/user/info/get?token=123123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"info",
+										"get"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "123123"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2019 05:29:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Application-Context",
+									"value": "application:local:8092"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.79.155, not in whitelist hint: [fZ5biA0981hb96]\",\n    \"data\": {},\n    \"success\": false\n}"
+						}
+					]
+				}
+			],
+			"description": "folder1描述"
+		},
+		{
+			"name": "request1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "totototototken",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "openid",
+							"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user/info/get?token=123123",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"info",
+						"get"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "123123"
+						}
+					]
+				},
+				"description": "request1描述"
+			},
+			"response": [
+				{
+					"name": "request1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "openid",
+									"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/info/get?token=123123",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"info",
+								"get"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "123123"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.14.0"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 May 2019 05:29:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-Application-Context",
+							"value": "application:local:8092"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.79.155, not in whitelist hint: [fZ5biA0981hb96]\",\n    \"data\": {},\n    \"success\": false\n}"
+				}
+			]
+		}
+	]
+}
