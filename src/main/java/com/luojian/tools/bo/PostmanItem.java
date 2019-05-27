@@ -9,11 +9,12 @@ import java.util.List;
  */
 @Data
 public class PostmanItem {
-    private String name;
-    private List<PostmanItem> item;
-    private String description;
-    private PostmanRequest request;
-    private List<PostmanResponse> response;
+    private String name;// folder leaf
+    private List<PostmanItem> item;//folder
+    private String description;//folder
+
+    private PostmanRequest request;//leaf
+    private List<PostmanResponse> response;//leaf
 
     public boolean isFolder(){
         return request == null ? true : false;

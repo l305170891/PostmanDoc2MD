@@ -29,11 +29,11 @@ public class MDUtils {
         }
     }
 
-    public static String getContent(String content){
-        return getContent(content, "");
+    public static String block(String content){
+        return block(content, "");
     }
 
-    public static String getContent(String content, String type){
+    public static String block(String content, String type){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(System.lineSeparator());
         stringBuilder.append("```");
