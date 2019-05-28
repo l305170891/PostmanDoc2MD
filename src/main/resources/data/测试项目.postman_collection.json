@@ -25,14 +25,16 @@
 						"method": "POST",
 						"header": [
 							{
+						
 								"key": "Content-Type",
-								"value": "application/json; charset=utf-8",
-								"type": "text"
+								"type": "text",
+								"value": "application/json; charset=utf-8"
 							},
 							{
+								"description": "注释1",
 								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -41,6 +43,7 @@
 								{
 									"key": "openid",
 									"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+									"description": "注释1",
 									"type": "text"
 								}
 							]
@@ -58,7 +61,8 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "123123"
+									"value": "123123",
+									"description": "注释1"
 								}
 							]
 						},
@@ -66,19 +70,21 @@
 					},
 					"response": [
 						{
-							"name": "request1",
+							"name": "request1 Copy 失败",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
+										"description": "注释1",
 										"key": "Content-Type",
-										"value": "application/json; charset=utf-8",
-										"type": "text"
+										"type": "text",
+										"value": "application/json; charset=utf-8"
 									},
 									{
+										"description": "注释1",
 										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
+										"type": "text",
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -87,6 +93,7 @@
 										{
 											"key": "openid",
 											"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+											"description": "注释1",
 											"type": "text"
 										}
 									]
@@ -104,7 +111,8 @@
 									"query": [
 										{
 											"key": "token",
-											"value": "123123"
+											"value": "123123",
+											"description": "注释1"
 										}
 									]
 								}
@@ -119,7 +127,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 27 May 2019 05:29:41 GMT"
+									"value": "Tue, 28 May 2019 03:08:46 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -143,7 +151,91 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.79.155, not in whitelist hint: [fZ5biA0981hb96]\",\n    \"data\": {},\n    \"success\": false\n}"
+							"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.178.206, not in whitelist hint: [09261533]\",\n    \"data\": {},\n    \"success\": false\n}"
+						},
+						{
+							"name": "request1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=utf-8",
+										"type": "text",
+										"description": "注释1"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"description": "注释1"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "openid",
+											"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+											"description": "注释1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/user/info/get?token=123123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"info",
+										"get"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "123123",
+											"description": "注释1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.14.0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2019 06:04:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Application-Context",
+									"value": "application:local:8092"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.79.155, not in whitelist hint: [O00412067]\",\n    \"data\": {},\n    \"success\": false\n}"
 						}
 					]
 				}
@@ -168,12 +260,14 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json; charset=utf-8",
-						"type": "text"
+						"type": "text",
+						"description": "注释1"
 					},
 					{
 						"key": "Accept",
 						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"description": "注释1"
 					}
 				],
 				"body": {
@@ -182,6 +276,7 @@
 						{
 							"key": "openid",
 							"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+							"description": "注释1",
 							"type": "text"
 						}
 					]
@@ -199,7 +294,8 @@
 					"query": [
 						{
 							"key": "token",
-							"value": "123123"
+							"value": "123123",
+							"description": "注释1"
 						}
 					]
 				},
@@ -214,12 +310,14 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json; charset=utf-8",
-								"type": "text"
+								"type": "text",
+								"description": "注释1"
 							},
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"description": "注释1"
 							}
 						],
 						"body": {
@@ -228,6 +326,7 @@
 								{
 									"key": "openid",
 									"value": "oTtfQ0jm_p0kg_q3n1_MoS32PJ_E",
+									"description": "注释1",
 									"type": "text"
 								}
 							]
@@ -245,7 +344,8 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "123123"
+									"value": "123123",
+									"description": "注释1"
 								}
 							]
 						}
@@ -260,7 +360,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 27 May 2019 05:29:41 GMT"
+							"value": "Mon, 27 May 2019 06:04:01 GMT"
 						},
 						{
 							"key": "Content-Type",
@@ -284,7 +384,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.79.155, not in whitelist hint: [fZ5biA0981hb96]\",\n    \"data\": {},\n    \"success\": false\n}"
+					"body": "{\n    \"code\": 40164,\n    \"msg\": \"invalid ip 125.70.79.155, not in whitelist hint: [O00412067]\",\n    \"data\": {},\n    \"success\": false\n}"
 				}
 			]
 		}

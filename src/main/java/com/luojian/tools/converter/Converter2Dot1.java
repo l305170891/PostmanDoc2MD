@@ -1,16 +1,14 @@
 package com.luojian.tools.converter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.luojian.tools.bo.PostmanDoc;
-import com.luojian.tools.bo.PostmanInfo;
-import com.luojian.tools.bo.PostmanItem;
-import com.luojian.tools.bo.PostmanRequest;
+import com.luojian.tools.bo.*;
+import com.luojian.tools.bo.postman.Param;
 import com.luojian.tools.common.FileUtils;
 import com.luojian.tools.common.MDUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by luojian on 2019/5/27.
@@ -21,6 +19,10 @@ public class Converter2Dot1 implements Converter {
     private String fileName;
     @Getter
     private String mdContent;
+
+    private StringBuilder s;
+
+    private PostmanDoc doc;
 
 
     public Converter2Dot1(String fileName){
@@ -34,8 +36,10 @@ public class Converter2Dot1 implements Converter {
      * @throws Exception
      */
     public String exec() throws Exception {
+        this.s = new StringBuilder();
+
         String fileContent = FileUtils.readFile(this.fileName);
-        PostmanDoc doc = JSONObject.parseObject(fileContent, PostmanDoc.class);
+        doc = JSONObject.parseObject(fileContent, PostmanDoc.class);
         this.mdContent = convertDoc(doc);
         return this.mdContent;
     }
@@ -46,23 +50,21 @@ public class Converter2Dot1 implements Converter {
      * @return
      */
     private String convertDoc(PostmanDoc doc){
-        StringBuilder md = new StringBuilder();
 
-        convertInfo(md, doc.getInfo());
-        convertItemList(md, doc.getItem(), 1, "");
+        convertInfo(doc.getInfo());
+        convertItemList(doc.getItem(), 1, "");
 
-        return md.toString();
+        return s.toString();
     }
 
     /**
      * 转换info节点
-     * @param s
      * @param info
      */
-    private void convertInfo(StringBuilder s, PostmanInfo info){
+    private void convertInfo(PostmanInfo info){
         s.append(MDUtils.getHeadPre(1));
         //文档名称
-        s.append(info.getName());
+        s.append(info.getName() + " " + new Date().toString());
         s.append(System.lineSeparator());
         //文档描述
         if(info.getDescription() != null){
@@ -75,10 +77,9 @@ public class Converter2Dot1 implements Converter {
 
     /**
      * 处理item节点
-     * @param s
      * @param itemList
      */
-    private void convertItemList(StringBuilder s, List<PostmanItem> itemList, int deep, String numPre){
+    private void convertItemList(List<PostmanItem> itemList, int deep, String numPre){
         for (int i=0; i<itemList.size(); i++ ) {
 
             PostmanItem item = itemList.get(i);
@@ -98,32 +99,35 @@ public class Converter2Dot1 implements Converter {
 
                 if(item.getItem() != null && item.getItem().size() > 0){
                     //请求
-                    convertItemList(s, item.getItem(), deep+1, numPre + (i +1) + ".");
+                    convertItemList(item.getItem(), deep+1, numPre + (i +1) + ".");
                 }
 
             }else{
-                convertItem(s, item, deep, numPre + (i+1));
+                convertItem(item, deep, numPre + (i+1));
             }
         }
     }
 
     /**
      * 转换item
-     * @param s
      * @param item
      * @param deep
      * @param num
      */
-    private void convertItem(StringBuilder s, PostmanItem item, int deep, String num){
+    private void convertItem(PostmanItem item, int deep, String num){
         //接口名称
         s.append(System.lineSeparator());
         s.append(MDUtils.getHeadPre(deep+1));
         s.append(num  + " " + item.getName());
 
-        convertRequest(s, item.getRequest());
+        convertRequest(item.getRequest());
+
+        if (item.getResponse() != null && item.getResponse().size() > 0){
+            convertResponse(item.getResponse());
+        }
     }
 
-    private void convertRequest(StringBuilder s, PostmanRequest request){
+    private void convertRequest(PostmanRequest request){
         //接口描述
         if(request.getDescription() != null){
             s.append(System.lineSeparator());
@@ -137,14 +141,23 @@ public class Converter2Dot1 implements Converter {
         s.append(System.lineSeparator());
         s.append(MDUtils.getHeadPre(6) + "Method");
         s.append(System.lineSeparator());
-        s.append(MDUtils.block(JSONObject.toJSONString(request.getHeader(), true), "json"));
+        s.append(MDUtils.block(request.getMethod()));
 
         //接口 Headers
         if(request.getHeader() != null && request.getHeader().size() > 0){
             s.append(System.lineSeparator());
             s.append(MDUtils.getHeadPre(6) + "Headers");
             s.append(System.lineSeparator());
-            s.append(MDUtils.block(JSONObject.toJSONString(request.getHeader(), true), "json"));
+            s.append(MDUtils.block(formatParam(request.getHeader()), "json"));
+        }
+
+        //接口 Auth
+        if(request.getAuth() != null && request.getAuth().getBearer() != null
+                && request.getAuth().getBearer().size() > 0){
+            s.append(System.lineSeparator());
+            s.append(MDUtils.getHeadPre(6) + "Auth");
+            s.append(System.lineSeparator());
+            s.append(MDUtils.block(formatParam(request.getAuth().getBearer()), "json"));
         }
 
         //接口 Params
@@ -152,7 +165,7 @@ public class Converter2Dot1 implements Converter {
             s.append(System.lineSeparator());
             s.append(MDUtils.getHeadPre(6) + "Params");
             s.append(System.lineSeparator());
-            s.append(MDUtils.block(JSONObject.toJSONString(request.getUrl().getQuery(), true), "json"));
+            s.append(MDUtils.block(formatParam(request.getUrl().getQuery()), "json"));
         }
 
         //接口 Body
@@ -161,7 +174,32 @@ public class Converter2Dot1 implements Converter {
             s.append(System.lineSeparator());
             s.append(MDUtils.getHeadPre(6) + "Body");
             s.append(System.lineSeparator());
-            s.append(MDUtils.block(JSONObject.toJSONString(request.getBody().getFormdata(), true), "json"));
+            s.append(MDUtils.block(formatParam(request.getBody().getFormdata()), "json"));
         }
+    }
+
+    private void convertResponse(List<PostmanResponse> responseList){
+        s.append(System.lineSeparator());
+        s.append(MDUtils.getHeadPre(6) + "Response");
+
+        for(PostmanResponse response : responseList){
+            s.append(System.lineSeparator());
+            s.append(MDUtils.block(response.getName() + System.lineSeparator() + response.getBody(), "json"));
+
+        }
+    }
+
+    private static String formatParam(List<Param> paramList){
+        Map<String, String> map = new HashMap<String, String>();
+        List<String> list = new ArrayList<String>();
+        for (Param param : paramList){
+            map.put(param.getKey(), param.getValue());
+            if(param.getDescription() != null && !"".equals(param.getDescription())){
+                list.add(param.getKey() + "=" + param.getDescription());
+            }
+
+        }
+
+        return JSONObject.toJSONString(map, true) + System.lineSeparator() + JSONObject.toJSONString(list);
     }
 }
