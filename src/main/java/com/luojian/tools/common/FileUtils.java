@@ -13,8 +13,8 @@ public class FileUtils {
      * @return
      * @throws Exception
      */
-    public static String getContent(String fileName) throws Exception {
-        return txt2String(new File(fileName));
+    public static String readFile(String fileName) throws Exception {
+        return readFile(new File(fileName));
     }
 
     /**
@@ -22,7 +22,7 @@ public class FileUtils {
      * @param file 想要读取的文件对象
      * @return 返回文件内容
      */
-    public static String txt2String(File file) throws Exception{
+    public static String readFile(File file) throws Exception{
         StringBuilder result = new StringBuilder();
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -33,6 +33,33 @@ public class FileUtils {
         br.close();
 
         return result.toString();
+    }
+
+
+    public static boolean writeFile(String content, String fileName) throws Exception {
+        FileOutputStream o = null;
+        boolean result=false;
+        try {
+            o = new FileOutputStream(fileName,true);
+            o.write(content.getBytes());
+            result=true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (o != null) {
+                try {
+                    o.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
     }
 
 

@@ -1,4 +1,4 @@
-package com.luojian.tools.conversioner;
+package com.luojian.tools.converter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.luojian.tools.bo.PostmanDoc;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by luojian on 2019/5/27.
  */
-public class Conversioner2dot1 implements Conversioner {
+public class Converter2Dot1 implements Converter {
 
     @Setter
     private String fileName;
@@ -23,7 +23,7 @@ public class Conversioner2dot1 implements Conversioner {
     private String mdContent;
 
 
-    public Conversioner2dot1(String fileName){
+    public Converter2Dot1(String fileName){
         this.fileName = fileName;
     }
 
@@ -34,7 +34,7 @@ public class Conversioner2dot1 implements Conversioner {
      * @throws Exception
      */
     public String exec() throws Exception {
-        String fileContent = FileUtils.getContent(this.fileName);
+        String fileContent = FileUtils.readFile(this.fileName);
         PostmanDoc doc = JSONObject.parseObject(fileContent, PostmanDoc.class);
         this.mdContent = convertDoc(doc);
         return this.mdContent;
